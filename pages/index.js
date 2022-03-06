@@ -5,10 +5,25 @@ import styles from '../styles/Home.module.css'
 
 const Home = () => {
   return (
-    <div>
-      <h2>Jeep</h2>
-      <div className='form-container'>
-        <SignupForm />
+    <div 
+      id='homeContainer' 
+      className='
+        flex 
+        justify-center 
+        items-center 
+        h-screen 
+        bg-gradient-radial
+        from-zinc-50
+        to-zinc-900'
+    >
+      <div className='h-96 w-96 bg-indigo-500 rounded-[30px]'>
+        <h2 className='flex justify-center'>Jeep</h2>
+        <p>placeholder...</p>
+        <p>placeholder...</p>
+        <p>placeholder...</p>
+        <p>placeholder...</p>
+        <p>placeholder...</p>
+        <p>placeholder...</p>
       </div>
     </div>
   )
