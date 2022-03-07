@@ -1,7 +1,8 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import FeedbackForm from '../components/FeedbackForm'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import Image from 'next/image';
+import FeedbackForm from '../components/FeedbackForm';
+import styles from '../styles/Home.module.css';
+import Table from '@mui/material/Table';
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       <div className='
         min-h-fit 
         w-w-min 
+        max-h-full
         max-w-[700px]
         p-5
         bg-glassy 

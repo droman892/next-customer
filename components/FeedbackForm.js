@@ -5,38 +5,48 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
+import Rating from '@mui/material/Rating';
+import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
+import Table from '@mui/material/Table';
+import Stack from '@mui/material/Stack';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
-var phoneRegEx = /\\(?\\d{3}\\)?[-\\/\\.\\s]?\\d{3}[-\\/\\.\\s]?/;
+const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
 const validationSchema = Yup.object({
 
-
-  
-
   firstName: Yup
     .string().max(15, 'Must be 15 characters or less')
-    .required('Required'),
+    .required('First Name Required'),
   lastName: Yup
     .string().max(15, 'Must be 15 characters or less')
-    .required('Required'),
+    .required('Last Name Required'),
   phone: Yup
     .string()
-    .matches(phoneRegExp, 'Phone number is not valid'),
+    .matches(phoneRegExp, 'Phone number is not valid')
+    .required('Phone Number Required'),
   email: Yup
     .string('Enter your email')
     .email('Enter a valid email')
     .required('Email is required'),
-  password: Yup
-    .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
 });
+
+
+
+function createData(name, option1, option2, option3) {
+  return { name, option1, option2, option3 };
+}
+
 
 const FeedbackForm = () => {
 
-  
-
-  
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -50,6 +60,20 @@ const FeedbackForm = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
+
+
+  const rows = [
+    createData(
+      "How satisfied are you with your products' delivery time?", 
+      <Radio name="question1" />, 
+      <Radio name="question1" />, 
+      <Radio name="question1" />
+    ),
+    createData("How pleased are you with your product's quality?", 1, 2, 3),
+    createData("How confident do you feel you'll shop with us again?", 1, 2, 3),
+  ];
+
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -99,6 +123,51 @@ const FeedbackForm = () => {
         />
 
 
+
+        {/* <Stack spacing={2}>
+            <span>Hello : </span>
+          <Rating
+            name="feedback-rating"
+            IconContainerComponent={PanoramaFishEyeIcon}
+            highlightSelectedOnly
+            max={5}
+            size='small'
+            value={3}
+          />
+        </Stack> */}
+
+
+        <TableContainer>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell align="center">Not Satisfied</TableCell>
+                <TableCell align="center">Satisfied</TableCell>
+                <TableCell align="center">Very Satisfied</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="center">{row.option1}</TableCell>
+                  <TableCell align="center">{row.option2}</TableCell>
+                  <TableCell align="center">{row.option3}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+
+
+        
 
         <Button color="primary" variant="contained" fullWidth type="submit">
           Submit
