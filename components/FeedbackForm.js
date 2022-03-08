@@ -1,22 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
-import Rating from '@mui/material/Rating';
-import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import Table from '@mui/material/Table';
-import Stack from '@mui/material/Stack';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
+import customerQuestions from '../data/customerQuestions';
+// import radioRows from './feedbackForm/RadioRows'; 
 
 const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
@@ -40,7 +37,7 @@ const validationSchema = Yup.object({
 
 
 
-function createData(name, option1, option2, option3) {
+const createData = (name, option1, option2, option3) => {
   return { name, option1, option2, option3 };
 }
 
@@ -61,17 +58,86 @@ const FeedbackForm = () => {
     },
   });
 
+  const [selectedValue1, setSelectedValue1] = useState("Satisfied");
+  const [selectedValue2, setSelectedValue2] = useState("Satisfied");
+  const [selectedValue3, setSelectedValue3] = useState("Satisfied");
 
+  const handleChange1 = (e) => {
+    setSelectedValue1(e.target.value);
+  };
 
-  const rows = [
+  const handleChange2 = (e) => {
+    setSelectedValue2(e.target.value);
+  };
+
+  const handleChange3 = (e) => {
+    setSelectedValue3(e.target.value);
+  };
+
+  const radioRows = [
     createData(
       "How satisfied are you with your products' delivery time?", 
-      <Radio name="question1" />, 
-      <Radio name="question1" />, 
-      <Radio name="question1" />
+      <Radio
+        checked={selectedValue1 === "Not Satisfied"}
+        onChange={handleChange1}
+        value="Not Satisfied"
+        name="radioQuestion1"
+      />,
+      <Radio
+        checked={selectedValue1 === "Satisfied"}
+        onChange={handleChange1}
+        value="Satisfied"
+        name="radioQuestion1"
+      />,
+      <Radio
+        checked={selectedValue1 === "Very Satisfied"}
+        onChange={handleChange1}
+        value="Very Satisfied"
+        name="radioQuestion1"
+      />
     ),
-    createData("How pleased are you with your product's quality?", 1, 2, 3),
-    createData("How confident do you feel you'll shop with us again?", 1, 2, 3),
+    createData(
+      "How pleased are you with your product's quality?", 
+      <Radio
+        checked={selectedValue2 === "Not Satisfied"}
+        onChange={handleChange2}
+        value="Not Satisfied"
+        name="radioQuestion2"
+      />,
+      <Radio
+        checked={selectedValue2 === "Satisfied"}
+        onChange={handleChange2}
+        value="Satisfied"
+        name="radioQuestion2"
+      />,
+      <Radio
+        checked={selectedValue2 === "Very Satisfied"}
+        onChange={handleChange2}
+        value="Very Satisfied"
+        name="radioQuestion2"
+      />
+    ),
+    createData(
+      "How confident do you feel you'll shop with us again?",
+      <Radio
+        checked={selectedValue3 === "Not Satisfied"}
+        onChange={handleChange3}
+        value="Not Satisfied"
+        name="radioQuestion3"
+      />,
+      <Radio
+        checked={selectedValue3 === "Satisfied"}
+        onChange={handleChange3}
+        value="Satisfied"
+        name="radioQuestion3"
+      />,
+      <Radio
+        checked={selectedValue3 === "Very Satisfied"}
+        onChange={handleChange3}
+        value="Very Satisfied"
+        name="radioQuestion3"
+      /> 
+    ),
   ];
 
 
@@ -121,24 +187,8 @@ const FeedbackForm = () => {
           error={formik.touched.email && Boolean(formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
         />
-
-
-
-        {/* <Stack spacing={2}>
-            <span>Hello : </span>
-          <Rating
-            name="feedback-rating"
-            IconContainerComponent={PanoramaFishEyeIcon}
-            highlightSelectedOnly
-            max={5}
-            size='small'
-            value={3}
-          />
-        </Stack> */}
-
-
         <TableContainer>
-          <Table aria-label="simple table">
+          <Table aria-label="Question Table">
             <TableHead>
               <TableRow>
                 <TableCell></TableCell>
@@ -148,10 +198,9 @@ const FeedbackForm = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {radioRows.map((row) => (
                 <TableRow
                   key={row.name}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
                     {row.name}
@@ -166,10 +215,17 @@ const FeedbackForm = () => {
         </TableContainer>
 
 
+        <TextareaAutosize
+          minRows={5}
+          maxRows={15}
+          className="w-full my-8 bg-transparent border-[1px] rounded-[4px]"
+          placeholder="Please share your thoughts..."
+        />
+
 
         
 
-        <Button color="primary" variant="contained" fullWidth type="submit">
+        <Button color="primary" variant="contained" fullWidth type="submit" className="mb-9">
           Submit
         </Button>
       </form>
