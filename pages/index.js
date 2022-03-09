@@ -12,11 +12,11 @@ const Home = () => {
         flex 
         justify-center 
         items-center  
-        px-9
+        px-5
         py-16
         bg-gradient-radial
-        from-zinc-50
-        to-zinc-800'
+        from-yellow-50
+        to-yellow-500'
     >
       <div className='
       
@@ -34,7 +34,7 @@ const Home = () => {
         md:max-w-[50%]
 
       '>
-        <h2 className='flex justify-center mb-4 text-xl'>
+        <h2 className='flex justify-center mb-4 text-xl font-bold'>
           Customer Feedback Form
         </h2>
         <h3 className='flex justify-center mb-2 text-center'>

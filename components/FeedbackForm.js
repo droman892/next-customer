@@ -10,8 +10,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Paper from '@mui/material/Paper';
+
 import customerQuestions from '../data/customerQuestions';
 // import radioRows from './feedbackForm/RadioRows'; 
 
@@ -33,6 +36,9 @@ const validationSchema = Yup.object({
     .string('Enter your email')
     .email('Enter a valid email')
     .required('Email is required'),
+  comments: Yup
+    .string().max(800, 'Must be 800 characters or less'),
+  // acknowledgement: Yup.boolean().oneOf([true], "Please be sure to acknowledge your data privacy.").required("Required")
 });
 
 
@@ -50,7 +56,11 @@ const FeedbackForm = () => {
       lastName: '',
       email: '',
       phone: '',
-      checked: []
+      q1: '',
+      q2: '',
+      q3: '',
+      comments: '',
+      acknowledgement: ''
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -82,18 +92,21 @@ const FeedbackForm = () => {
         onChange={handleChange1}
         value="Not Satisfied"
         name="radioQuestion1"
+        // className='text-amber-400'
       />,
       <Radio
         checked={selectedValue1 === "Satisfied"}
         onChange={handleChange1}
         value="Satisfied"
         name="radioQuestion1"
+        // className='text-amber-400'
       />,
       <Radio
         checked={selectedValue1 === "Very Satisfied"}
         onChange={handleChange1}
         value="Very Satisfied"
         name="radioQuestion1"
+        // className='text-amber-400'
       />
     ),
     createData(
@@ -142,7 +155,7 @@ const FeedbackForm = () => {
 
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form autoComplete="off" onSubmit={formik.handleSubmit}>
         <TextField
           className="mb-4"
           fullWidth
@@ -153,6 +166,8 @@ const FeedbackForm = () => {
           onChange={formik.handleChange}
           error={formik.touched.firstName && Boolean(formik.errors.firstName)}
           helperText={formik.touched.firstName && formik.errors.firstName}
+          inputProps={{style: {fontSize: 15}}}
+          InputLabelProps={{style: {fontSize: 15}}}
         />
         <TextField
           className="mb-4"
@@ -164,6 +179,9 @@ const FeedbackForm = () => {
           onChange={formik.handleChange}
           error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           helperText={formik.touched.lastName && formik.errors.lastName}
+          inputProps={{style: {fontSize: 15}}}
+          InputLabelProps={{style: {fontSize: 15}}}
+          sx={{ input: { borderColor: '2px solid red' } }}
         />
         <TextField
           className="mb-4"
@@ -175,6 +193,8 @@ const FeedbackForm = () => {
           onChange={formik.handleChange}
           error={formik.touched.phone && Boolean(formik.errors.phone)}
           helperText={formik.touched.phone && formik.errors.phone}
+          inputProps={{style: {fontSize: 15}}}
+          InputLabelProps={{style: {fontSize: 15}}}
         />
         <TextField
           className="mb-4"
@@ -186,15 +206,17 @@ const FeedbackForm = () => {
           onChange={formik.handleChange}
           error={formik.touched.email && Boolean(formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
+          inputProps={{style: {fontSize: 15}}}
+          InputLabelProps={{style: {fontSize: 15}}}
         />
         <TableContainer>
           <Table aria-label="Question Table">
             <TableHead>
               <TableRow>
                 <TableCell></TableCell>
-                <TableCell align="center">Not Satisfied</TableCell>
-                <TableCell align="center">Satisfied</TableCell>
-                <TableCell align="center">Very Satisfied</TableCell>
+                <TableCell align="center" className="px-2 font-normal">Not Satisfied</TableCell>
+                <TableCell align="center" className="px-2 font-medium">Satisfied</TableCell>
+                <TableCell align="center" className="px-2">Very Satisfied</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -202,12 +224,12 @@ const FeedbackForm = () => {
                 <TableRow
                   key={row.name}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell component="th" scope="row" className="px-0 text-[15px]">
                     {row.name}
                   </TableCell>
-                  <TableCell align="center">{row.option1}</TableCell>
-                  <TableCell align="center">{row.option2}</TableCell>
-                  <TableCell align="center">{row.option3}</TableCell>
+                  <TableCell align="center" className="p-0 text-[15px]">{row.option1}</TableCell>
+                  <TableCell align="center" className="p-0 text-[15px]">{row.option2}</TableCell>
+                  <TableCell align="center" className="p-0 text-[15px]">{row.option3}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -216,16 +238,46 @@ const FeedbackForm = () => {
 
 
         <TextareaAutosize
+          name="comments"
+          value={formik.values.comments}
+          onChange={formik.handleChange}
+          error={formik.touched.comments && Boolean(formik.errors.comments)}
+          helperText={formik.touched.comments && formik.errors.comments}
           minRows={5}
           maxRows={15}
-          className="w-full my-8 bg-transparent border-[1px] rounded-[4px]"
+          className="
+            w-full 
+            mt-8
+            mb-5
+            bg-transparent 
+            border-[1px] 
+            rounded-[4px] 
+            placeholder:text-slate-500
+            p-2
+            text-[15px]
+          "
           placeholder="Please share your thoughts..."
+        />
+
+        <FormControlLabel
+          name="acknowledgement"
+          value="end"
+          control={<Checkbox  />}
+          label="Please acknowledge that your responses are privately held."
+          labelPlacement="end"
+          className="mb-5"
+          
         />
 
 
         
 
-        <Button color="primary" variant="contained" fullWidth type="submit" className="mb-9">
+        <Button 
+          color="primary" 
+          variant="contained" 
+          fullWidth 
+          type="submit" 
+          className="mb-9 font-bold bg-amber-400 hover:bg-amber-500 text-[15px]">
           Submit
         </Button>
       </form>

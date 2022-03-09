@@ -14,3 +14,32 @@ body {
   box-sizing: border-box;
   line-height: 1.15;
 }
+
+
+
+/* ----- The classes below are specific to Material UI ----- */
+
+.MuiRadio-root.Mui-checked {
+  color: #FFA000;
+}
+
+textarea:focus-visible {
+  outline: 2px solid #FFA000;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #FFA000;
+}
+
+
+/* .MuiCheckbox-root {
+  color: #FFA000 !important;
+} */
+
+MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
+  color: red;
+}
+
+PrivateSwitchBase {
+  color: inherit;
+}
