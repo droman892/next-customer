@@ -13,10 +13,6 @@ import TableRow from '@mui/material/TableRow';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Paper from '@mui/material/Paper';
-
-import customerQuestions from '../data/customerQuestions';
-// import radioRows from './feedbackForm/RadioRows'; 
 
 const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
@@ -30,7 +26,7 @@ const validationSchema = Yup.object({
     .required('Last Name Required'),
   phone: Yup
     .string()
-    .matches(phoneRegExp, 'Phone number is not valid')
+    .matches(phoneRegExp, 'Enter a valid Phone Number')
     .required('Phone Number Required'),
   email: Yup
     .string('Enter your email')
@@ -38,7 +34,10 @@ const validationSchema = Yup.object({
     .required('Email is required'),
   comments: Yup
     .string().max(800, 'Must be 800 characters or less'),
-  // acknowledgement: Yup.boolean().oneOf([true], "Please be sure to acknowledge your data privacy.").required("Required")
+  acknowledgement: Yup
+    .boolean()
+    .oneOf([true], "Please be sure to acknowledge your data privacy.")
+    .required("Required")
 });
 
 
@@ -64,7 +63,7 @@ const FeedbackForm = () => {
       q2: '',
       q3: '',
       comments: '',
-      acknowledgement: ''
+      acknowledgement: false
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -94,6 +93,7 @@ const FeedbackForm = () => {
         onChange={handleChange1}
         value="Not Satisfied"
         name="q1"
+        id="q1"
         // className='text-amber-400'
       />,
       <Radio
@@ -101,6 +101,7 @@ const FeedbackForm = () => {
         onChange={handleChange1}
         value="Satisfied"
         name="q1"
+        id="q1"
         // className='text-amber-400'
       />,
       <Radio
@@ -108,6 +109,7 @@ const FeedbackForm = () => {
         onChange={handleChange1}
         value="Very Satisfied"
         name="q1"
+        id="q1"
         // className='text-amber-400'
       />
     ),
@@ -197,7 +199,7 @@ const FeedbackForm = () => {
           helperText={formik.touched.phone && formik.errors.phone}
           inputProps={{style: {fontSize: 15}}}
           InputLabelProps={{style: {fontSize: 15}}}
-        />
+        /> 
         <TextField
           className="mb-4"
           fullWidth
@@ -263,12 +265,14 @@ const FeedbackForm = () => {
 
         <FormControlLabel
           name="acknowledgement"
-          value="end"
-          control={<Checkbox  />}
+          control={<Checkbox />}
           label="Please acknowledge that your responses are privately held."
           labelPlacement="end"
           className="mb-5"
-          
+          value={formik.values.acknowledgement}
+          onChange={formik.handleChange}
+          error={formik.touched.acknowledgement && Boolean(formik.errors.acknowledgement)}
+          helperText={formik.touched.acknowledgement && formik.errors.acknowledgement}
         />
 
 
