@@ -50,6 +50,10 @@ const createData = (name, option1, option2, option3) => {
 
 const FeedbackForm = () => {
 
+  const [selectedValue1, setSelectedValue1] = useState("Satisfied");
+  const [selectedValue2, setSelectedValue2] = useState("Satisfied");
+  const [selectedValue3, setSelectedValue3] = useState("Satisfied");
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -68,9 +72,7 @@ const FeedbackForm = () => {
     },
   });
 
-  const [selectedValue1, setSelectedValue1] = useState("Satisfied");
-  const [selectedValue2, setSelectedValue2] = useState("Satisfied");
-  const [selectedValue3, setSelectedValue3] = useState("Satisfied");
+  
 
   const handleChange1 = (e) => {
     setSelectedValue1(e.target.value);
@@ -91,21 +93,21 @@ const FeedbackForm = () => {
         checked={selectedValue1 === "Not Satisfied"}
         onChange={handleChange1}
         value="Not Satisfied"
-        name="radioQuestion1"
+        name="q1"
         // className='text-amber-400'
       />,
       <Radio
         checked={selectedValue1 === "Satisfied"}
         onChange={handleChange1}
         value="Satisfied"
-        name="radioQuestion1"
+        name="q1"
         // className='text-amber-400'
       />,
       <Radio
         checked={selectedValue1 === "Very Satisfied"}
         onChange={handleChange1}
         value="Very Satisfied"
-        name="radioQuestion1"
+        name="q1"
         // className='text-amber-400'
       />
     ),
