@@ -17,36 +17,32 @@ body {
 
 /* ----- The classes below are specific to Material UI ----- */
 
-.MuiRadio-root.Mui-checked {
-  color: #FFA000;
-}
-
-textarea:focus-visible {
-  outline: 2px solid #FFA000;
-}
-
-.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: #FFA000;
-}
-
 .MuiCheckbox-root.Mui-checked {
   color: #FFA000;
-}
-
-.MuiInputLabel-root.Mui-focused {
-  color: #FFA000;
-}
-
-.MuiInputLabel-root.Mui-error {
-  color: #dc2626;
 }
 
 .MuiFormHelperText-root.Mui-error {
   color: #dc2626;
 }
 
+.MuiInputLabel-root.Mui-error {
+  color: #dc2626;
+}
+
 .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
   border-color: #dc2626;
+}
+
+.MuiInputLabel-root.Mui-focused {
+  color: #FFA000;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #FFA000;
+}
+
+.MuiRadio-root.Mui-checked {
+  color: #FFA000;
 }
 
 .MuiTypography-root {
@@ -57,4 +53,6 @@ textarea:focus-visible {
   min-height: 100vh;
 }
 
-
+textarea:focus-visible {
+  outline: 2px solid #FFA000;
+}
