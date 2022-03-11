@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Link from 'next/link'
 
 const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
@@ -277,15 +278,17 @@ const FeedbackForm = () => {
 
 
         
+        <Link href="/acknowledgement">
+          <Button 
+            color="primary" 
+            variant="contained" 
+            fullWidth 
+            type="submit" 
+            className="mb-9 font-bold bg-amber-400 hover:bg-amber-500 text-[15px]">
+            Submit
+          </Button>
+        </Link>
 
-        <Button 
-          color="primary" 
-          variant="contained" 
-          fullWidth 
-          type="submit" 
-          className="mb-9 font-bold bg-amber-400 hover:bg-amber-500 text-[15px]">
-          Submit
-        </Button>
       </form>
   );
 };
