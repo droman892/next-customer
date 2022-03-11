@@ -10,7 +10,8 @@ const StandardPage = (props) => {
           py-16
           bg-gradient-radial
           from-yellow-50
-          to-yellow-500'
+          to-yellow-500
+          screen-height'
       >
         {props.children}
       </div>

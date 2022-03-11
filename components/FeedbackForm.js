@@ -170,7 +170,7 @@ const FeedbackForm = () => {
           value={formik.values.firstName}
           onChange={formik.handleChange}
           error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-          helperText={formik.touched.firstName && formik.errors.firstName}
+          helpertext={formik.touched.firstName && formik.errors.firstName}
           inputProps={{style: {fontSize: 15}}}
           InputLabelProps={{style: {fontSize: 15}}}
         />
@@ -183,7 +183,7 @@ const FeedbackForm = () => {
           value={formik.values.lastName}
           onChange={formik.handleChange}
           error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-          helperText={formik.touched.lastName && formik.errors.lastName}
+          helpertext={formik.touched.lastName && formik.errors.lastName}
           inputProps={{style: {fontSize: 15}}}
           InputLabelProps={{style: {fontSize: 15}}}
           sx={{ input: { borderColor: '2px solid red' } }}
@@ -197,7 +197,7 @@ const FeedbackForm = () => {
           value={formik.values.phone}
           onChange={formik.handleChange}
           error={formik.touched.phone && Boolean(formik.errors.phone)}
-          helperText={formik.touched.phone && formik.errors.phone}
+          helpertext={formik.touched.phone && formik.errors.phone}
           inputProps={{style: {fontSize: 15}}}
           InputLabelProps={{style: {fontSize: 15}}}
         /> 
@@ -210,7 +210,7 @@ const FeedbackForm = () => {
           value={formik.values.email}
           onChange={formik.handleChange}
           error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
+          helpertext={formik.touched.email && formik.errors.email}
           inputProps={{style: {fontSize: 15}}}
           InputLabelProps={{style: {fontSize: 15}}}
         />
@@ -247,7 +247,7 @@ const FeedbackForm = () => {
           value={formik.values.comments}
           onChange={formik.handleChange}
           error={formik.touched.comments && Boolean(formik.errors.comments)}
-          helperText={formik.touched.comments && formik.errors.comments}
+          helpertext={formik.touched.comments && formik.errors.comments}
           minRows={5}
           maxRows={15}
           className="
@@ -269,16 +269,16 @@ const FeedbackForm = () => {
           control={<Checkbox />}
           label="Please acknowledge that your responses are privately held."
           labelPlacement="end"
-          className="mb-5"
+          className="mb-5 text-[15px]"
           value={formik.values.acknowledgement}
           onChange={formik.handleChange}
           error={formik.touched.acknowledgement && Boolean(formik.errors.acknowledgement)}
-          helperText={formik.touched.acknowledgement && formik.errors.acknowledgement}
+          helpertext={formik.touched.acknowledgement && formik.errors.acknowledgement}
         />
 
 
         
-        <Link href="/acknowledgement">
+        {/* <Link href="/acknowledgement" passHref> */}
           <Button 
             color="primary" 
             variant="contained" 
@@ -287,7 +287,7 @@ const FeedbackForm = () => {
             className="mb-9 font-bold bg-amber-400 hover:bg-amber-500 text-[15px]">
             Submit
           </Button>
-        </Link>
+        {/* </Link> */}
 
       </form>
   );

@@ -45,16 +45,16 @@ textarea:focus-visible {
   color: #dc2626;
 }
 
-/* .MuiOutlinedInput-notchedOutline {
-  border-color: yellow !important;
-} */
-
 .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
   border-color: #dc2626;
 }
 
+.MuiTypography-root {
+  font-size: inherit;
+}
 
-
-
+.screen-height {
+  min-height: 100vh;
+}
 
 
