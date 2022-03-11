@@ -1,4 +1,4 @@
-import StandardPage from '../layout/Standard Page';
+import StandardPage from '../layout/StandardPage';
 
 const Acknowledgement = () => {
     return (
