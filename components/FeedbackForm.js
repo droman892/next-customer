@@ -15,6 +15,8 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from 'next/link'
 
+import { SubmitButton } from './feedbackForm/SubmitButton';
+
 const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
 const validationSchema = Yup.object({
@@ -276,18 +278,7 @@ const FeedbackForm = () => {
           helpertext={formik.touched.acknowledgement && formik.errors.acknowledgement}
         />
 
-
-        
-        {/* <Link href="/acknowledgement" passHref> */}
-          <Button 
-            color="primary" 
-            variant="contained" 
-            fullWidth 
-            type="submit" 
-            className="mb-9 font-bold bg-amber-400 hover:bg-amber-500 text-[15px]">
-            Submit
-          </Button>
-        {/* </Link> */}
+          <SubmitButton />
 
       </form>
   );
