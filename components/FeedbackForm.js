@@ -15,39 +15,18 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from 'next/link'
 
+import { validationSchema } from '../formik/validationSchema';
+
+import { TextArea } from './feedbackForm/Textarea';
 import { SubmitButton } from './feedbackForm/SubmitButton';
-
-const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-
-const validationSchema = Yup.object({
-
-  firstName: Yup
-    .string().max(15, 'Must be 15 characters or less')
-    .required('First Name Required'),
-  lastName: Yup
-    .string().max(15, 'Must be 15 characters or less')
-    .required('Last Name Required'),
-  phone: Yup
-    .string()
-    .matches(phoneRegExp, 'Enter a valid Phone Number')
-    .required('Phone Number Required'),
-  email: Yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
-  comments: Yup
-    .string().max(800, 'Must be 800 characters or less'),
-  acknowledgement: Yup
-    .boolean()
-    .oneOf([true], "Please be sure to acknowledge your data privacy.")
-    .required("Required")
-});
-
-
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
+import { useFormikLogic } from '../formik/useFormikLogic';
 
 const createData = (name, option1, option2, option3) => {
   return { name, option1, option2, option3 };
 }
+
 
 
 const FeedbackForm = () => {
@@ -55,6 +34,8 @@ const FeedbackForm = () => {
   const [selectedValue1, setSelectedValue1] = useState("Satisfied");
   const [selectedValue2, setSelectedValue2] = useState("Satisfied");
   const [selectedValue3, setSelectedValue3] = useState("Satisfied");
+
+  // const { formik } = useFormikLogic(); 
 
   const formik = useFormik({
     initialValues: {
@@ -65,6 +46,7 @@ const FeedbackForm = () => {
       q1: '',
       q2: '',
       q3: '',
+      q11: '',
       comments: '',
       acknowledgement: false
     },
@@ -244,6 +226,21 @@ const FeedbackForm = () => {
         </TableContainer>
 
 
+
+        <FormControl>
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+      >
+        <FormControlLabel name="q11" value="female" control={<Radio />} label="Female" />
+        <FormControlLabel name="q11" value="male" control={<Radio />} label="Male" />
+        <FormControlLabel name="q11" value="other" control={<Radio />} label="Other" />
+      </RadioGroup>
+      </FormControl>
+
+
+
         <TextareaAutosize
           name="comments"
           value={formik.values.comments}
@@ -265,6 +262,8 @@ const FeedbackForm = () => {
           "
           placeholder="Please share your thoughts..."
         />
+
+        {/* <TextArea /> */}
 
         <FormControlLabel
           name="acknowledgement"
